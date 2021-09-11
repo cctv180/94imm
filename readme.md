@@ -77,3 +77,29 @@ server {
     }
 }
 ```
+
+***补充***
+```
+install.sh 不适用于 Debian 系列，也就是手动操作
+apt install -y mariadb-server python3 python3-setuptools nginx
+
+pip3 install -r requirements.txt 安装过程有个模块缺少依赖搜索解决
+重新装了补充
+正如这里提到的，你应该这样做：
+sudo apt-get install python3-dev default-libmysqlclient-dev build-essential
+Debian / Ubuntu
+sudo yum install python3-devel mysql-devel
+红帽 / CentOS
+之后就做 pip install mysqlclient
+
+手动替换dj_pagination的pagination.html 这里是3.8版本路径有点区别
+rm -f /usr/local/lib/python3.8/dist-packages/dj_pagination/templates/pagination/pagination.html
+cp templates/zde/pagination.html /usr/local/lib/python3.8/dist-packages/dj_pagination/templates/pagination/pagination.html
+
+run.sh 我的环境报错，需要删除function声明，原因不明,到这里就妥啦
+nginx配置按需要弄
+
+附一些能用到的命令
+查看服务器 8000 端口的占用情况： lsof -i:8000
+内网请求下数据确认OK： curl http://127.0.0.1:8000
+```
